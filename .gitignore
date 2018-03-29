@@ -1,0 +1,8 @@
+*.a
+*.out
+*.o
+*.swp
+test
+ft_array/
+libft/
+minilibx_macos/
