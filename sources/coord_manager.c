@@ -6,7 +6,7 @@
 /*   By: bpisano <marvin@le-101.fr>                 +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/03/29 14:10:37 by bpisano      #+#   ##    ##    #+#       */
-/*   Updated: 2018/03/29 19:11:06 by bpisano     ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/03/30 12:45:00 by bpisano     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -58,7 +58,7 @@ void		z_rotation(t_coord *coord, double rot)
 	coord->y = -(sin(rot)) * x + cos(rot) * y;
 }
 
-t_array		to_2d(t_array td_ar, t_coord *rot)
+t_array		rotate(t_array td_ar, t_coord *rot)
 {
 	int		y;
 	int		x;
