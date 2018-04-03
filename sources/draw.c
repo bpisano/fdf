@@ -6,7 +6,7 @@
 /*   By: bpisano <marvin@le-101.fr>                 +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/03/29 18:29:35 by bpisano      #+#   ##    ##    #+#       */
-/*   Updated: 2018/04/03 13:46:32 by bpisano     ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/04/03 19:10:56 by bpisano     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -15,12 +15,39 @@
 
 double	dx(t_coord *c1, t_coord *c2)
 {
-	return fabs(c2->x - c1->x);
+	return (fabs(c2->x - c1->x));
 }
 
 double	dy(t_coord *c1, t_coord *c2)
 {
-	return fabs(c2->y - c1->y);
+	return (fabs(c2->y - c1->y));
+}
+
+int		color(t_coord *c1, t_coord *c2, int x, int y)
+{
+	double	px;
+	double	py;
+	double	pz;
+	double	height;
+
+	if (((int)c2->x - (int)c1->x) != 0)
+		px = (double)(x - (int)c1->x) / ((int)c2->x - (int)c1->x);
+	else
+		px = 1;
+	if (((int)c2->y - (int)c1->y) != 0)
+		py = (double)(y - (int)c1->y) / ((int)c2->y - (int)c1->y);
+	else
+		py = 1;
+	pz = (px + py) / 2;
+	if (c1->oz < c2->oz)
+		height = c1->oz + (fabs(c1->oz - c2->oz) * pz);
+	else
+		height = c1->oz - (fabs(c1->oz - c2->oz) * pz);
+	printf("%d, %d,   %d, %d,   %d, %d - %f, %f, %f, %f\n", x, y,
+			(int)c1->x, (int)c1->y,
+			(int)c2->x, (int)c2->y,
+			px, py, pz, height);
+	return (RGB(255 - (height * 10), 255 - (height * 10), 255));
 }
 
 void	draw_line(t_env *env, t_coord *c1, t_coord *c2)
@@ -33,11 +60,9 @@ void	draw_line(t_env *env, t_coord *c1, t_coord *c2)
 	y = floor(c1->y);
 	x = floor(c1->x);
 	err = (dx(c1, c2) > dy(c1, c2) ? dx(c1, c2) : -dy(c1, c2)) / 2;
-	while (x != floor(c2->x) || y != floor(c2->y))
+	while ((x != floor(c2->x) || y != floor(c2->y)) && (err_cpy = err))
 	{
-		mlx_pixel_put(env->mlx, env->wdw, x, y, RGB(255, 255, 255));
-		err_cpy = err;
-		printf("%d, %d, %f, %f, %f, %f\n", x, y, c1->x, c1->y, c2->x, c2->y);
+		mlx_pixel_put(env->mlx, env->wdw, x, y, color(c1, c2, x, y));
 		if (err_cpy > -dx(c1, c2))
 		{
 			err -= dy(c1, c2);
@@ -51,7 +76,8 @@ void	draw_line(t_env *env, t_coord *c1, t_coord *c2)
 				y += c1->y < c2->y ? 1 : -1;
 		}
 	}
-	mlx_pixel_put(env->mlx, env->wdw, x, y, RGB(255, 255, 255));	
+	mlx_pixel_put(env->mlx, env->wdw, x, y, color(c1, c2, x, y));
+	printf("\n");
 }
 
 void	draw(t_env *env)
@@ -80,5 +106,5 @@ void	draw(t_env *env)
 				draw_line(env, coord, last_coord_y);
 			}
 		}
-	}	
+	}
 }

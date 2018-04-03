@@ -6,7 +6,7 @@
 #    By: bpisano <marvin@le-101.fr>                 +:+   +:    +:    +:+      #
 #                                                  #+#   #+    #+    #+#       #
 #    Created: 2018/03/28 13:32:34 by bpisano      #+#   ##    ##    #+#        #
-#    Updated: 2018/03/29 19:10:07 by bpisano     ###    #+. /#+    ###.fr      #
+#    Updated: 2018/04/03 15:28:38 by bpisano     ###    #+. /#+    ###.fr      #
 #                                                          /                   #
 #                                                         /                    #
 # **************************************************************************** #
@@ -18,6 +18,7 @@ SRC = sources/fdf.c				\
 	  sources/mlx_manager.c		\
 	  sources/coord_manager.c	\
 	  sources/draw.c			\
+	  sources/memory_manager.c	\
 
 
 OBJECTS = $(SRC:.c=.o)

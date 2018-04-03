@@ -6,7 +6,7 @@
 /*   By: bpisano <marvin@le-101.fr>                 +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/03/29 14:10:37 by bpisano      #+#   ##    ##    #+#       */
-/*   Updated: 2018/03/30 12:45:00 by bpisano     ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/04/03 16:05:55 by bpisano     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -22,6 +22,7 @@ t_coord		*set_coord(double x, double y, double z)
 	point->x = x;
 	point->y = y;
 	point->z = z;
+	point->oz = z;
 	return (point);
 }
 

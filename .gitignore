@@ -7,3 +7,4 @@ fdf
 ft_array/
 libft/
 minilibx_macos/
+*dSYM/

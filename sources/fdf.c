@@ -6,7 +6,7 @@
 /*   By: bpisano <marvin@le-101.fr>                 +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/03/28 16:15:51 by bpisano      #+#   ##    ##    #+#       */
-/*   Updated: 2018/04/03 13:51:52 by bpisano     ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/04/03 19:12:23 by bpisano     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -28,26 +28,9 @@ int		main(int ac, char **av)
 	if (!parse(av[1], &env))
 		return (0);
 
-	rotate(env.coords, set_coord(to_rad(45), to_rad(45), to_rad(10)));
-
-	int		y;
-	int		x;
-
-	y = -1;
-	while (env.coords[++y])
-	{
-		x = -1;
-		while (((t_array)env.coords[y])[++x])
-		{
-			t_coord *coord;
-
-			coord = (t_coord *)((t_array)env.coords[y])[x];
-			printf("%f, %f, %f\n", coord->x, coord->y, coord->z);
-		}
-		printf("\n");
-	}
-
+	rotate(env.coords, set_coord(to_rad(45), to_rad(-45), to_rad(0)));
 	draw(&env);
 	start_loop(&env);
+	free_env(&env);
 	return (0);
 }

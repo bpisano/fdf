@@ -6,7 +6,7 @@
 /*   By: bpisano <marvin@le-101.fr>                 +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/03/28 13:38:02 by bpisano      #+#   ##    ##    #+#       */
-/*   Updated: 2018/04/03 13:09:33 by bpisano     ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/04/03 16:04:31 by bpisano     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -27,6 +27,7 @@ typedef struct	s_coord
 	double		x;
 	double		y;
 	double		z;
+	double		oz;
 }				t_coord;
 
 typedef struct	s_env
@@ -34,10 +35,11 @@ typedef struct	s_env
 	void		*mlx;
 	void		*wdw;
 	t_array		coords;
-	t_coord		rot;
 }				t_env;
 
 void			init_env(t_env *env);
+void			free_env(t_env *env);
+void			clear_window(t_env *env);
 void			start_loop(t_env *env);
 
 int				parse(char *file_name, t_env *env);

@@ -1,31 +1,36 @@
 /* ************************************************************************** */
 /*                                                          LE - /            */
 /*                                                              /             */
-/*   window.c                                         .::    .:/ .      .::   */
+/*   memory_manager.c                                 .::    .:/ .      .::   */
 /*                                                 +:+:+   +:    +:  +:+:+    */
 /*   By: bpisano <marvin@le-101.fr>                 +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
-/*   Created: 2018/03/28 18:07:20 by bpisano      #+#   ##    ##    #+#       */
-/*   Updated: 2018/04/03 14:54:47 by bpisano     ###    #+. /#+    ###.fr     */
+/*   Created: 2018/04/03 15:26:04 by bpisano      #+#   ##    ##    #+#       */
+/*   Updated: 2018/04/03 15:33:19 by bpisano     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
 
 #include "fdf.h"
 
-void	start_loop(t_env *env)
+void	free_env(t_env *env)
 {
-	mlx_loop(env->mlx);
-}
+	int		y;
+	int		x;
+	t_coord	*coord;
 
-void	clear_window(t_env *env)
-{
-	mlx_clear_window(env->mlx, env->wdw);
-}
-
-void	init_env(t_env *env)
-{
-	env->mlx = mlx_init();
-	env->wdw = mlx_new_window(env->mlx, 500, 400, "fdf");
-	ar_init(&(env->coords), 0);
+	y = -1;
+	while (env->coords[++y])
+	{
+		x = -1;
+		while (((t_array)env->coords[y])[++x])
+		{
+			coord = (t_coord *)((t_array)env->coords[y])[x];
+			free(coord);
+		}
+		free(env->coords[y]);
+	}
+	free(env->coords);
+	free(env->wdw);
+	free(env->mlx);
 }
