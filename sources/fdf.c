@@ -6,7 +6,7 @@
 /*   By: bpisano <marvin@le-101.fr>                 +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/03/28 16:15:51 by bpisano      #+#   ##    ##    #+#       */
-/*   Updated: 2018/03/30 14:05:41 by bpisano     ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/04/03 13:51:52 by bpisano     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -28,7 +28,7 @@ int		main(int ac, char **av)
 	if (!parse(av[1], &env))
 		return (0);
 
-	//env.coords = rotate(env.coords, set_coord(to_rad(90), 0, 0));
+	rotate(env.coords, set_coord(to_rad(45), to_rad(45), to_rad(10)));
 
 	int		y;
 	int		x;

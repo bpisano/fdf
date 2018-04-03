@@ -6,7 +6,7 @@
 /*   By: bpisano <marvin@le-101.fr>                 +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/03/28 15:53:10 by bpisano      #+#   ##    ##    #+#       */
-/*   Updated: 2018/03/29 15:35:16 by bpisano     ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/04/03 13:05:21 by bpisano     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -21,7 +21,7 @@ t_array	point_array(char **split, int y)
 	x = -1;
 	ar_init(&new, 1);
 	while (split[++x])
-		ar_append(&new, set_coord(x, y, ft_atoi(split[x])));
+		ar_append(&new, set_coord(x * 20 + 100, y * 20 + 100, ft_atoi(split[x])));
 	return (new);
 }
 
