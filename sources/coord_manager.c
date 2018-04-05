@@ -6,7 +6,7 @@
 /*   By: bpisano <marvin@le-101.fr>                 +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/03/29 14:10:37 by bpisano      #+#   ##    ##    #+#       */
-/*   Updated: 2018/04/03 16:05:55 by bpisano     ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/04/05 19:13:46 by bpisano     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -19,10 +19,12 @@ t_coord		*set_coord(double x, double y, double z)
 
 	if (!(point = (t_coord *)malloc(sizeof(t_coord))))
 		return (NULL);
+	point->ox = x;
+	point->oy = y;
+	point->oz = z;
 	point->x = x;
 	point->y = y;
 	point->z = z;
-	point->oz = z;
 	return (point);
 }
 
@@ -59,24 +61,24 @@ void		z_rotation(t_coord *coord, double rot)
 	coord->y = -(sin(rot)) * x + cos(rot) * y;
 }
 
-t_array		rotate(t_array td_ar, t_coord *rot)
+void		rotate(t_env *env, double rx, double ry, double rz)
 {
 	int		y;
 	int		x;
-	t_coord *td;
-	t_array	dd_ar;
+	t_coord	*coord;
 
-	dd_ar = td_ar;
 	y = -1;
-	while (dd_ar[++y])
+	while (env->coords[++y])
 	{
 		x = -1;
-		while ((td = (t_coord *)((t_array)dd_ar[y])[++x]))
+		while ((coord = (t_coord *)((t_array)env->coords[y])[++x]))
 		{
-			x_rotation(td, rot->x);
-			y_rotation(td, rot->y);
-			z_rotation(td, rot->z);
+			coord->x = coord->ox;
+			coord->y = coord->oy;
+			coord->z = coord->oz;
+			x_rotation(coord, to_rad(rx));
+			y_rotation(coord, to_rad(ry));
+			z_rotation(coord, to_rad(rz));
 		}
 	}
-	return (dd_ar);
 }

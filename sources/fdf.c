@@ -6,7 +6,7 @@
 /*   By: bpisano <marvin@le-101.fr>                 +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/03/28 16:15:51 by bpisano      #+#   ##    ##    #+#       */
-/*   Updated: 2018/04/03 19:12:23 by bpisano     ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/04/05 19:13:27 by bpisano     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -27,9 +27,11 @@ int		main(int ac, char **av)
 	init_env(&env);
 	if (!parse(av[1], &env))
 		return (0);
-
-	rotate(env.coords, set_coord(to_rad(45), to_rad(-45), to_rad(0)));
+	rotate(&env, 45, 45, 0);
 	draw(&env);
+	rotate(&env, 0, 0, 0);
+	draw(&env);
+	mlx_clear_window(env.mlx, env.wdw);
 	start_loop(&env);
 	free_env(&env);
 	return (0);

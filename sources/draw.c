@@ -6,7 +6,7 @@
 /*   By: bpisano <marvin@le-101.fr>                 +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/03/29 18:29:35 by bpisano      #+#   ##    ##    #+#       */
-/*   Updated: 2018/04/03 19:10:56 by bpisano     ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/04/05 19:13:02 by bpisano     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -43,10 +43,10 @@ int		color(t_coord *c1, t_coord *c2, int x, int y)
 		height = c1->oz + (fabs(c1->oz - c2->oz) * pz);
 	else
 		height = c1->oz - (fabs(c1->oz - c2->oz) * pz);
-	printf("%d, %d,   %d, %d,   %d, %d - %f, %f, %f, %f\n", x, y,
+	/*printf("%d, %d,   %d, %d,   %d, %d - %f, %f, %f, %f\n", x, y,
 			(int)c1->x, (int)c1->y,
 			(int)c2->x, (int)c2->y,
-			px, py, pz, height);
+			px, py, pz, height);*/
 	return (RGB(255 - (height * 10), 255 - (height * 10), 255));
 }
 
@@ -77,7 +77,6 @@ void	draw_line(t_env *env, t_coord *c1, t_coord *c2)
 		}
 	}
 	mlx_pixel_put(env->mlx, env->wdw, x, y, color(c1, c2, x, y));
-	printf("\n");
 }
 
 void	draw(t_env *env)
@@ -88,10 +87,11 @@ void	draw(t_env *env)
 	t_coord	*last_coord_x;
 	t_coord *last_coord_y;
 
+	clear_window(env);
+	set_env_size(env, 0, 0);
+	set_env_offset(env);
 	y = -1;
-	while (env->coords[++y])
-	{
-		x = -1;
+	while (env->coords[++y] && (x = -1))
 		while (((t_array)env->coords[y])[++x])
 		{
 			coord = (t_coord *)((t_array)env->coords[y])[x];
@@ -106,5 +106,4 @@ void	draw(t_env *env)
 				draw_line(env, coord, last_coord_y);
 			}
 		}
-	}
 }

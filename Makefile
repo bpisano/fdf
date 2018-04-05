@@ -6,7 +6,7 @@
 #    By: bpisano <marvin@le-101.fr>                 +:+   +:    +:    +:+      #
 #                                                  #+#   #+    #+    #+#       #
 #    Created: 2018/03/28 13:32:34 by bpisano      #+#   ##    ##    #+#        #
-#    Updated: 2018/04/03 15:28:38 by bpisano     ###    #+. /#+    ###.fr      #
+#    Updated: 2018/04/05 14:10:05 by bpisano     ###    #+. /#+    ###.fr      #
 #                                                          /                   #
 #                                                         /                    #
 # **************************************************************************** #
@@ -16,6 +16,7 @@ NAME = fdf
 SRC = sources/fdf.c				\
 	  sources/parse.c			\
 	  sources/mlx_manager.c		\
+	  sources/env_manager.c		\
 	  sources/coord_manager.c	\
 	  sources/draw.c			\
 	  sources/memory_manager.c	\
