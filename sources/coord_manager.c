@@ -6,7 +6,7 @@
 /*   By: bpisano <marvin@le-101.fr>                 +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/03/29 14:10:37 by bpisano      #+#   ##    ##    #+#       */
-/*   Updated: 2018/04/05 19:13:46 by bpisano     ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/04/11 12:09:21 by bpisano     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -81,4 +81,7 @@ void		rotate(t_env *env, double rx, double ry, double rz)
 			z_rotation(coord, to_rad(rz));
 		}
 	}
+	env->rx = rx;
+	env->ry = ry;
+	env->rz = rz;
 }

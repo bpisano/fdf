@@ -6,7 +6,7 @@
 /*   By: bpisano <marvin@le-101.fr>                 +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/03/29 18:29:35 by bpisano      #+#   ##    ##    #+#       */
-/*   Updated: 2018/04/05 19:13:02 by bpisano     ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/04/10 10:24:18 by bpisano     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -43,11 +43,11 @@ int		color(t_coord *c1, t_coord *c2, int x, int y)
 		height = c1->oz + (fabs(c1->oz - c2->oz) * pz);
 	else
 		height = c1->oz - (fabs(c1->oz - c2->oz) * pz);
-	/*printf("%d, %d,   %d, %d,   %d, %d - %f, %f, %f, %f\n", x, y,
-			(int)c1->x, (int)c1->y,
-			(int)c2->x, (int)c2->y,
+	/*printf("%d, %d,   %f, %f,   %f, %f - %f, %f, %f, %f\n", x, y,
+			c1->x, c1->y,
+			c2->x, c2->y,
 			px, py, pz, height);*/
-	return (RGB(255 - (height * 10), 255 - (height * 10), 255));
+	return (RGB(255 - (height * 10), 255 - (height * 100), 255));
 }
 
 void	draw_line(t_env *env, t_coord *c1, t_coord *c2)
@@ -62,20 +62,27 @@ void	draw_line(t_env *env, t_coord *c1, t_coord *c2)
 	err = (dx(c1, c2) > dy(c1, c2) ? dx(c1, c2) : -dy(c1, c2)) / 2;
 	while ((x != floor(c2->x) || y != floor(c2->y)) && (err_cpy = err))
 	{
+		//fill_pixel(env, x, y, color(c1, c2, x, y));
 		mlx_pixel_put(env->mlx, env->wdw, x, y, color(c1, c2, x, y));
-		if (err_cpy > -dx(c1, c2))
+
+		if (err_cpy > -dx(c1, c2) && dx(c1, c2) != 0)
 		{
 			err -= dy(c1, c2);
 			if (x != floor(c2->x))
 				x += c1->x < c2->x ? 1 : -1;
 		}
-		if (err_cpy < dy(c1, c2))
+		if (err_cpy < dy(c1, c2) && dy(c1, c2) != 0)
 		{
 			err += dx(c1, c2);
 			if (y != floor(c2->y))
 				y += c1->y < c2->y ? 1 : -1;
 		}
+		if (floor(dx(c1, c2)) == 0)
+			x = floor(c2->x);
+		if (floor(dy(c1, c2)) == 0)
+			y = floor(c2->y);
 	}
+	//fill_pixel(env, x, y, color(c1, c2, x, y));
 	mlx_pixel_put(env->mlx, env->wdw, x, y, color(c1, c2, x, y));
 }
 
@@ -90,6 +97,7 @@ void	draw(t_env *env)
 	clear_window(env);
 	set_env_size(env, 0, 0);
 	set_env_offset(env);
+	//new_image(env);
 	y = -1;
 	while (env->coords[++y] && (x = -1))
 		while (((t_array)env->coords[y])[++x])
@@ -106,4 +114,5 @@ void	draw(t_env *env)
 				draw_line(env, coord, last_coord_y);
 			}
 		}
+	//display(env);
 }

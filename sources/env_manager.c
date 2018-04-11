@@ -6,7 +6,7 @@
 /*   By: bpisano <marvin@le-101.fr>                 +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/04/05 14:09:28 by bpisano      #+#   ##    ##    #+#       */
-/*   Updated: 2018/04/05 18:56:37 by bpisano     ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/04/11 14:18:24 by bpisano     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -46,15 +46,17 @@ void	set_env_offset(t_env *env)
 {
 	int		y;
 	int		x;
+	int		zo;
 	t_coord *coord;
 
+	zo = ZOOM;
 	y = -1;
 	while (env->coords[++y] && (x = -1))
 		while (((t_array)env->coords[y])[++x])
 		{
 			coord = (t_coord *)((t_array)env->coords[y])[x];
-			coord->x = coord->x * 10 + (W_WIDTH / 2) - (env->width * 10 / 2);
-			coord->y = coord->y * 10 + (W_HEIGHT / 2) - (env->height * 10 / 2);
+			coord->x = coord->x * zo + (W_WIDTH / 2) - (env->width * 10 / 2);
+			coord->y = coord->y * zo + (W_HEIGHT / 2) - (env->height * 10 / 2);
 			coord->z = coord->z;	
 		}
 }
@@ -66,4 +68,7 @@ void	init_env(t_env *env)
 	ar_init(&(env->coords), 0);
 	env->width = 0;
 	env->height = 0;
+	env->rx = 0;
+	env->ry = 0;
+	env->rz = 0;
 }
