@@ -6,7 +6,7 @@
 /*   By: bpisano <marvin@le-101.fr>                 +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/03/28 13:38:02 by bpisano      #+#   ##    ##    #+#       */
-/*   Updated: 2018/04/11 14:18:08 by bpisano     ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/04/17 12:39:43 by bpisano     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -30,6 +30,9 @@
 # define ARROW_DOWN 125
 # define ARROW_RIGHT 124
 # define ARROW_LEFT 123
+# define ZOOM_IN 69
+# define ZOOM_OUT 78
+# define ESC 53
 
 typedef struct	s_coord
 {
@@ -45,18 +48,17 @@ typedef struct	s_env
 {
 	void		*mlx;
 	void		*wdw;
-	void		*img;
-	char		*img_data;
 	t_array		coords;
 	int			width;
 	int			height;
 	int			rx;
 	int			ry;
 	int			rz;
+	int			zoom;
 }				t_env;
 
 void			init_env(t_env *env);
-void			set_env_size(t_env *env, int x, int y);
+void			set_env_size(t_env *env, double x, double y);
 void			set_env_offset(t_env *env);
 void			free_env(t_env *env);
 

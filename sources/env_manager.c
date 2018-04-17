@@ -6,19 +6,19 @@
 /*   By: bpisano <marvin@le-101.fr>                 +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/04/05 14:09:28 by bpisano      #+#   ##    ##    #+#       */
-/*   Updated: 2018/04/11 14:18:24 by bpisano     ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/04/17 12:26:27 by bpisano     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
 
 #include "fdf.h"
 
-void	set_env_size(t_env *env, int x, int y)
+void	set_env_size(t_env *env, double x, double y)
 {
-	int		min_x;
-	int		min_y;
-	int		max_x;
-	int		max_y;
+	double	min_x;
+	double	min_y;
+	double	max_x;
+	double	max_y;
 	t_coord *coord;
 
 	min_x = 9999999;
@@ -26,20 +26,20 @@ void	set_env_size(t_env *env, int x, int y)
 	max_x = -9999999;
 	max_y = -9999999;
 	y = -1;
-	while (env->coords[++y])
+	while (env->coords[(int)++y])
 	{
 		x = -1;
-		while (((t_array)env->coords[y])[++x])
+		while (((t_array)env->coords[(int)y])[(int)++x])
 		{
-			coord = (t_coord *)((t_array)env->coords[y])[x];
-			min_x = coord->x < min_x ? x : min_x;
-			min_y = coord->y < min_y ? y : min_y;
-			max_x = coord->x > max_x ? x : max_x;
-			max_y = coord->y > max_y ? y : max_y;
+			coord = (t_coord *)((t_array)env->coords[(int)y])[(int)x];
+			min_x = coord->x < min_x ? fabs(coord->x) : min_x;
+			min_y = coord->y < min_y ? fabs(coord->y) : min_y;
+			max_x = coord->x > max_x ? fabs(coord->x) : max_x;
+			max_y = coord->y > max_y ? fabs(coord->y) : max_y;
 		}
 	}
-	env->width = max_x - min_x;
-	env->height = max_y - min_y;
+	env->width = (max_x - min_x) * env->zoom;
+	env->height = (max_y - min_y) * env->zoom;
 }
 
 void	set_env_offset(t_env *env)
@@ -49,15 +49,14 @@ void	set_env_offset(t_env *env)
 	int		zo;
 	t_coord *coord;
 
-	zo = ZOOM;
+	zo = env->zoom;
 	y = -1;
 	while (env->coords[++y] && (x = -1))
 		while (((t_array)env->coords[y])[++x])
 		{
 			coord = (t_coord *)((t_array)env->coords[y])[x];
-			coord->x = coord->x * zo + (W_WIDTH / 2) - (env->width * 10 / 2);
-			coord->y = coord->y * zo + (W_HEIGHT / 2) - (env->height * 10 / 2);
-			coord->z = coord->z;	
+			coord->x = coord->x * zo + (W_WIDTH / 2) - (env->width / 2);
+			coord->y = coord->y * zo + (W_HEIGHT / 2) - (env->height / 2);
 		}
 }
 
@@ -68,6 +67,7 @@ void	init_env(t_env *env)
 	ar_init(&(env->coords), 0);
 	env->width = 0;
 	env->height = 0;
+	env->zoom = 10;
 	env->rx = 0;
 	env->ry = 0;
 	env->rz = 0;
