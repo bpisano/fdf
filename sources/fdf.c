@@ -6,7 +6,7 @@
 /*   By: bpisano <marvin@le-101.fr>                 +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/03/28 16:15:51 by bpisano      #+#   ##    ##    #+#       */
-/*   Updated: 2018/04/10 09:30:43 by bpisano     ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/04/25 15:21:25 by bpisano     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -27,8 +27,6 @@ int		main(int ac, char **av)
 	init_env(&env);
 	if (!parse(av[1], &env))
 		return (0);
-	//rotate(&env, 180, 45, 0);
-	//draw(&env);
 	rotate(&env, 0, 0, 0);
 	draw(&env);
 	start_loop(&env);

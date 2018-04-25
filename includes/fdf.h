@@ -6,7 +6,7 @@
 /*   By: bpisano <marvin@le-101.fr>                 +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/03/28 13:38:02 by bpisano      #+#   ##    ##    #+#       */
-/*   Updated: 2018/04/17 12:39:43 by bpisano     ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/04/24 19:25:28 by bpisano     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -75,5 +75,6 @@ t_coord			*set_coord(double x, double y, double z);
 void			rotate(t_env *env, double rx, double ry, double rz);
 
 void			draw(t_env *env);
+int				color(t_coord *c1, t_coord *c2, int x, int y);
 
 #endif

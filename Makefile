@@ -6,7 +6,7 @@
 #    By: bpisano <marvin@le-101.fr>                 +:+   +:    +:    +:+      #
 #                                                  #+#   #+    #+    #+#       #
 #    Created: 2018/03/28 13:32:34 by bpisano      #+#   ##    ##    #+#        #
-#    Updated: 2018/04/05 14:10:05 by bpisano     ###    #+. /#+    ###.fr      #
+#    Updated: 2018/04/24 19:24:27 by bpisano     ###    #+. /#+    ###.fr      #
 #                                                          /                   #
 #                                                         /                    #
 # **************************************************************************** #
@@ -19,6 +19,7 @@ SRC = sources/fdf.c				\
 	  sources/env_manager.c		\
 	  sources/coord_manager.c	\
 	  sources/draw.c			\
+	  sources/color_manager.c	\
 	  sources/memory_manager.c	\
 
 

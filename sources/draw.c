@@ -6,7 +6,7 @@
 /*   By: bpisano <marvin@le-101.fr>                 +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/03/29 18:29:35 by bpisano      #+#   ##    ##    #+#       */
-/*   Updated: 2018/04/17 12:25:37 by bpisano     ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/04/24 19:25:43 by bpisano     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -23,27 +23,11 @@ double	dy(t_coord *c1, t_coord *c2)
 	return (fabs(c2->y - c1->y));
 }
 
-int		color(t_coord *c1, t_coord *c2, int x, int y)
+double	init_draw(int *x, int *y, t_coord *c1, t_coord *c2)
 {
-	double	px;
-	double	py;
-	double	pz;
-	double	height;
-
-	if (((int)c2->x - (int)c1->x) != 0)
-		px = (double)(x - (int)c1->x) / ((int)c2->x - (int)c1->x);
-	else
-		px = 1;
-	if (((int)c2->y - (int)c1->y) != 0)
-		py = (double)(y - (int)c1->y) / ((int)c2->y - (int)c1->y);
-	else
-		py = 1;
-	pz = (px + py) / 2;
-	if (c1->oz < c2->oz)
-		height = c1->oz + (fabs(c1->oz - c2->oz) * pz);
-	else
-		height = c1->oz - (fabs(c1->oz - c2->oz) * pz);
-	return (RGB(255 - (height * 150), 255, 255 - (height * 200)));
+	*y = floor(c1->y);
+	*x = floor(c1->x);
+	return ((dx(c1, c2) > dy(c1, c2) ? dx(c1, c2) : -dy(c1, c2)) / 2);
 }
 
 void	draw_line(t_env *env, t_coord *c1, t_coord *c2)
@@ -53,13 +37,10 @@ void	draw_line(t_env *env, t_coord *c1, t_coord *c2)
 	double	err;
 	double	err_cpy;
 
-	y = floor(c1->y);
-	x = floor(c1->x);
-	err = (dx(c1, c2) > dy(c1, c2) ? dx(c1, c2) : -dy(c1, c2)) / 2;
+	err = init_draw(&x, &y, c1, c2);
 	while ((x != floor(c2->x) || y != floor(c2->y)) && (err_cpy = err))
 	{
 		mlx_pixel_put(env->mlx, env->wdw, x, y, color(c1, c2, x, y));
-
 		if (err_cpy > -dx(c1, c2) && dx(c1, c2) != 0)
 		{
 			err -= dy(c1, c2);
@@ -72,10 +53,8 @@ void	draw_line(t_env *env, t_coord *c1, t_coord *c2)
 			if (y != floor(c2->y))
 				y += c1->y < c2->y ? 1 : -1;
 		}
-		if (floor(dx(c1, c2)) == 0)
-			x = floor(c2->x);
-		if (floor(dy(c1, c2)) == 0)
-			y = floor(c2->y);
+		x = floor(dx(c1, c2)) == 0 ? floor(c2->x) : x;
+		y = floor(dy(c1, c2)) == 0 ? floor(c2->y) : y;
 	}
 	mlx_pixel_put(env->mlx, env->wdw, x, y, color(c1, c2, x, y));
 }
@@ -91,7 +70,6 @@ void	draw(t_env *env)
 	clear_window(env);
 	set_env_size(env, 0, 0);
 	set_env_offset(env);
-	//new_image(env);
 	y = -1;
 	while (env->coords[++y] && (x = -1))
 		while (((t_array)env->coords[y])[++x])
@@ -108,5 +86,4 @@ void	draw(t_env *env)
 				draw_line(env, coord, last_coord_y);
 			}
 		}
-	//display(env);
 }

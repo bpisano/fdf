@@ -6,7 +6,7 @@
 /*   By: bpisano <marvin@le-101.fr>                 +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/03/28 18:07:20 by bpisano      #+#   ##    ##    #+#       */
-/*   Updated: 2018/04/17 12:44:12 by bpisano     ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/04/24 19:08:06 by bpisano     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -16,7 +16,7 @@
 int		handle_key(int key, t_env *env)
 {
 	if (key == ESC)
-		exit (0);
+		exit(0);
 	else if (key == ARROW_UP)
 		rotate(env, env->rx + ROT_SPEED, env->ry, env->rz);
 	else if (key == ARROW_DOWN)
